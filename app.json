@@ -1,6 +1,7 @@
 {
   "expo": {
     "name": "moneypal",
+    "plugins": ["@react-native-google-signin/google-signin"],
     "slug": "moneypal",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -9,7 +10,7 @@
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#FFA800"
     },
     "assetBundlePatterns": [
       "**/*"
@@ -18,6 +19,8 @@
       "supportsTablet": true
     },
     "android": {
+      "googleServicesFile": "./google-services.json",
+      "package": "com.pushpak.rawat.moneypal",
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
@@ -25,6 +28,17 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "8cc2803c-730d-4934-9aeb-0184ca39e6ba"
+      }
+    },
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/8cc2803c-730d-4934-9aeb-0184ca39e6ba"
     }
   }
 }
