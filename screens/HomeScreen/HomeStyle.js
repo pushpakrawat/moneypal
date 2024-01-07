@@ -1,9 +1,10 @@
 import { StyleSheet } from "react-native";
 import { useSelector } from "react-redux";
-import { dark, light } from "../../assets/Theme/Theme";
+import { useTheme } from "react-native-paper";
 
 const useDynamicStyles = () => {
-  const mode = useSelector((state) => state.app.themeMode);
+  // const mode = useSelector((state) => state.app.themeMode);
+  const mode = useTheme()
 
   const styles = StyleSheet.create({
     container: {

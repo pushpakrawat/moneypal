@@ -1,5 +1,5 @@
 const initialState = {
-    themeMode: "dark",
+    themeMode: "light",
 };
 
 export const appReducer = (state = initialState, action) => {
