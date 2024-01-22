@@ -1,0 +1,79 @@
+import React, { useState, useEffect, useRef } from "react";
+import { Alert } from "react-native";
+import * as Device from "expo-device";
+import Constants from "expo-constants";
+import * as Notifications from "expo-notifications";
+import { updateDeviceTokenInFirestore } from "../../firebase/firebaseUtils";
+
+Notifications.setNotificationHandler({
+  handleNotification: async () => ({
+    shouldShowAlert: true,
+    shouldPlaySound: false,
+    shouldSetBadge: false,
+  }),
+});
+
+async function registerForPushNotificationsAsync() {
+  let token;
+
+  if (Device.isDevice) {
+    const { status: existingStatus } = await Notifications.getPermissionsAsync();
+    let finalStatus = existingStatus;
+
+    if (existingStatus !== "granted") {
+      const { status } = await Notifications.requestPermissionsAsync();
+      finalStatus = status;
+    }
+
+    if (finalStatus !== "granted") {
+      Alert.alert("Permission Denied", "Failed to get push token for push notification!");
+      return;
+    }
+
+    token = await Notifications.getExpoPushTokenAsync({
+      projectId: Constants.expoConfig.extra.eas.projectId,
+    });
+    console.log(token);
+  } else {
+    Alert.alert("Device Not Supported", "Must use a physical device for Push Notifications");
+  }
+
+  return token.data;
+}
+
+const NotificationsComponent = ({ userId }) => {
+  const responseListener = useRef();
+  const notificationListener = useRef();
+  const [expoPushToken, setExpoPushToken] = useState('');
+  console.log("userId received: ", userId)
+  useEffect(() => {
+    const fetchTokenAndRegister = async () => {
+      try {
+        const token = await registerForPushNotificationsAsync();
+        setExpoPushToken(token);
+        await updateDeviceTokenInFirestore(userId, token);
+      } catch (error) {
+        console.error('Error fetching or updating token:', error);
+      }
+    };
+
+    fetchTokenAndRegister();
+
+    notificationListener.current = Notifications.addNotificationReceivedListener((notification) => {
+      console.log(notification);
+    });
+
+    responseListener.current = Notifications.addNotificationResponseReceivedListener((response) => {
+      console.log(response);
+    });
+
+    return () => {
+      Notifications.removeNotificationSubscription(notificationListener.current);
+      Notifications.removeNotificationSubscription(responseListener.current);
+    };
+  }, [userId]);
+
+  return null; 
+};
+
+export default NotificationsComponent;
