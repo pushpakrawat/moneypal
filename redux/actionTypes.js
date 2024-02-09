@@ -33,4 +33,4 @@ export const REGISTER_USER_SUCCESS = 'REGISTER_USER_SUCCESS';
 
 // App Action Types
 
-export const TOGGLE_THEME = 'TOGGLE_THEME';
+export const TOGGLE_THEME_COLORS = 'TOGGLE_THEME_COLORS';

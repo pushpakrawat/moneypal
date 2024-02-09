@@ -1,10 +1,11 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { useSelector } from "react-redux";
-import { dark, light } from "../../assets/Theme/Theme";
+// import { dark, light } from "../../assets/Theme/Theme";
+import { useTheme } from 'react-native-paper';
 
 const ExpenseSummary = () => {
-  const mode = useSelector((state) => state.app.themeMode); // Fetch themeMode from appReducer
+  const mode = useSelector((state) => state.app.themeColors);
 
   const expenses = useSelector((state) => state.expense.filteredExpenses);
   const currentMonth = useSelector((state) => state.expense.currentMonth) + 1;

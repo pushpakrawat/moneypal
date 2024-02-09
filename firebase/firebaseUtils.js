@@ -9,9 +9,10 @@ import {
 } from "firebase/firestore";
 
 const getUserExpensesCollectionRef = (userId) => {
-  const db = FIREBASE_DB;
-  const userDocRef = doc(db, "users", userId);
-  return collection(userDocRef, "userExpenses");
+  console.log("user id in firebaseutills : ", userId);
+  const userDocRef = doc(FIREBASE_DB, "users", userId);
+  const userCollRef = collection(userDocRef, "userExpenses");
+  return userCollRef;
 };
 
 // GET EXPENSES
@@ -30,6 +31,7 @@ export const getExpensesFromFirestore = async (userId) => {
     throw error;
   }
 };
+
 // ADD EXPENSES
 export const addExpenseToFirestore = async (expense, userId) => {
   console.log("Firebase Utils - expense sent: ", expense);
@@ -44,26 +46,12 @@ export const addExpenseToFirestore = async (expense, userId) => {
   }
 };
 
-//ADD DEVICE TOKEN TO FIRRESTORE
-export const updateDeviceTokenInFirestore = async (userId, token) => {
-  try {
-    const userDocRef = doc(collection(FIREBASE_DB, 'users'), userId);
-    
-    // Update the device token in Firestore
-    await updateDoc(userDocRef, {
-      deviceTokens: {
-        [token]: true,
-      },
-    });
-
-    console.log('Device token updated in Firestore.');
-  } catch (error) {
-    console.error('Error updating device token in Firestore:', error);
-  }
-};
-
 //UPDATE EXPENSES
-export const updateExpenseInFirestore = async (expenseId, updatedData, userId) => {
+export const updateExpenseInFirestore = async (
+  expenseId,
+  updatedData,
+  userId
+) => {
   try {
     const userExpensesCollectionRef = getUserExpensesCollectionRef(userId);
     const expenseDocRef = doc(userExpensesCollectionRef, expenseId);
@@ -87,6 +75,3 @@ export const deleteExpenseFromFirestore = async (expenseId, userId) => {
     throw error;
   }
 };
-
-
-

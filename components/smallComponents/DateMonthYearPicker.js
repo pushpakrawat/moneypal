@@ -5,7 +5,7 @@ import { setExpenseDate } from "../../redux/actions/expenseActions";
 import DateTimePicker from "@react-native-community/datetimepicker";
 
 export default function DateMonthYearPicker() {
-  const mode = useSelector((state) => state.app.themeMode);
+  const mode = useSelector((state) => state.app.themeColors);
   const dispatch = useDispatch();
   const selectedDate = useSelector((state) => state.expense.expenseEndDate);
   const isRecurring = useSelector((state) => state.expense.isRecurring);

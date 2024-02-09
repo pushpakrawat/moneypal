@@ -10,7 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectFrequency } from "../../redux/actions/expenseActions"; // Import your Redux action
 
 const FrequencySelector = () => {
-  const mode = useSelector((state) => state.app.themeMode);
+  const mode = useSelector((state) => state.app.themeColors);
   const dispatch = useDispatch();
   const selectedFrequencyIndex =
     useSelector((state) => state.expense.selectedFrequency) - 1; // Replace with your Redux state selector

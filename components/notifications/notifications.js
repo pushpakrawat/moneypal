@@ -3,7 +3,8 @@ import { Alert } from "react-native";
 import * as Device from "expo-device";
 import Constants from "expo-constants";
 import * as Notifications from "expo-notifications";
-import { updateDeviceTokenInFirestore } from "../../firebase/firebaseUtils";
+import { FIREBASE_DB } from "../../firebase/firebaseconfig";
+import { collection, doc, updateDoc } from "firebase/firestore";
 
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
@@ -12,6 +13,23 @@ Notifications.setNotificationHandler({
     shouldSetBadge: false,
   }),
 });
+
+export const updateDeviceTokenInFirestore = async (userId, token) => {
+  try {
+    const userDocRef = doc(collection(FIREBASE_DB, 'users'), userId);
+    
+    // Update the device token in Firestore
+    await updateDoc(userDocRef, {
+      deviceTokens: {
+        [token]: true,
+      },
+    });
+
+    console.log('Device token updated in Firestore.');
+  } catch (error) {
+    console.error('Error updating device token in Firestore:', error);
+  }
+};
 
 async function registerForPushNotificationsAsync() {
   let token;

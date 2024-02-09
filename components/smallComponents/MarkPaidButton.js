@@ -11,7 +11,7 @@ const MarkPaidButton = ({ expense }) => {
   const dispatch = useDispatch();
   const currentMonth = useSelector((state) => state.expense.currentMonth) + 1;
   const currentYear = useSelector((state) => state.expense.currentYear);
-  const mode = useSelector((state) => state.app.themeMode); // Get the themeMode
+  const mode = useSelector((state) => state.app.themeColors);
 
   const [isPaid, setIsPaid] = useState('');
 

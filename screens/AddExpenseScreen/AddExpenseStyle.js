@@ -1,10 +1,9 @@
 import { StyleSheet } from "react-native";
 import { useSelector } from 'react-redux';
-import { useTheme } from "react-native-paper";
 
 const useCustomStyles = () => {
-  // const mode = useSelector((state) => state.app.themeMode);
-  const mode = useTheme()
+  
+  const mode = useSelector((state) => state.app.themeColors);
 
   const styles = StyleSheet.create({
     container: {

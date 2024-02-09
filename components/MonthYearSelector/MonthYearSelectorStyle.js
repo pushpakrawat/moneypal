@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 
 // Define your styles as a functional component
 const useDynamicStyles = () => {
-  const mode = useSelector((state) => state.app.themeMode);
+  const mode = useSelector((state) => state.app.themeColors);
 
   return StyleSheet.create({
     container: {

@@ -63,7 +63,7 @@ const getStyles = (mode) => {
 };
 
 export default function TabNavigator() {
-  const mode = useSelector((state) => state.app.themeMode);
+  const mode = useSelector((state) => state.app.themeColors);
 
   const TabButton = (props) => {
     const { item, onPress, accessibilityState } = props;

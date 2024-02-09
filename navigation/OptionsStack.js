@@ -8,7 +8,7 @@ import { useSelector } from "react-redux";
 const Stack = createStackNavigator();
 
 const OptionsStack = () => {
-  const mode = useSelector((state) => state.app.themeMode);
+  const mode = useSelector((state) => state.app.themeColors);
 
   const screenOptions = {
 

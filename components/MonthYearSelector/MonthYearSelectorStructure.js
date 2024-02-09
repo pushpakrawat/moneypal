@@ -6,7 +6,7 @@ import { useMonthYearSelectorLogic } from './MonthYearSelectorCode';
 import useDynamicStyles from './MonthYearSelectorStyle';
 
 const MonthYearSelectorStructure = () => {
-  const mode = useSelector((state) => state.app.themeMode);
+  const mode = useSelector((state) => state.app.themeColors);
   const {
     currentMonthName,
     currentYear,

@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setMonthlyDate } from "../../redux/actions/expenseActions";
 
 export default function DateSelector() {
-  const mode = useSelector((state) => state.app.themeMode);
+  const mode = useSelector((state) => state.app.themeColors);
   const monthlyDate = useSelector((state) => state.expense.selectedDate);
 
   const dispatch = useDispatch();

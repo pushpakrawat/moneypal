@@ -9,7 +9,7 @@ import AntDesign from "react-native-vector-icons/AntDesign";
 import useDynamicStyles from "./ExpenseItemStyle"; // Import your useDynamicStyles
 
 const ExpenseItemStructure = ({ expense }) => {
-  const mode = useSelector((state) => state.app.themeMode);
+  const mode = useSelector((state) => state.app.themeColors);
   const { formattedDate, formattedDueDate, confirmDelete } =
     useExpenseItemLogic(expense);
   const { id, title, amount, isRecurring } = expense;

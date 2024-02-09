@@ -19,7 +19,7 @@ const DeviceOptions = () => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
   const [notificationsEnabled, setNotificationsEnabled] = useState(true); 
-  const mode = useSelector((state) => state.app.themeMode);
+  const mode = useSelector((state) => state.app.themeColors);
 
   const handleSignOut = async () => {
     try {

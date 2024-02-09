@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import auth from '@react-native-firebase/auth';
 import GoogleSignInButton from './GoogleSignInButton';
 import { useNavigation } from "@react-navigation/native";
@@ -11,43 +11,6 @@ import NotificationsComponent from '../notifications/notifications';
 
 GoogleSignin.configure({
   webClientId: '87159361615-8pc7907l3bft0fr32tupcnpdgqml6149.apps.googleusercontent.com',
-});
-
-export function GoogleSignIn() {
-  const dispatch = useDispatch();
-  const navigation = useNavigation();
-  const [userUid, setUserUid] = useState(null);
-
-  const handleGoogleSignIn = async () => {
-    try {
-      const uid = await onGoogleButtonPress();
-      console.log('Signed in with Google! User UID:', uid);
-      dispatch(setUserId(uid)); 
-      dispatch(setExpenseDocId(uid));
-      setUserUid(uid);
-      navigation.navigate('TabNavigator');
-    } catch (error) {
-      console.error('Error signing in with Google:', error);
-      // Handle error as needed
-    }
-  };
-
-  return (
-    <TouchableOpacity style={styles.container} onPress={handleGoogleSignIn}>
-      <GoogleSignInButton/>
-      {userUid && <NotificationsComponent userId={userUid} />}
-    </TouchableOpacity>
-  );
-}
-
-const styles = StyleSheet.create({
-  container: {
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  centeredContent: {
-    alignItems: 'center',
-  },
 });
 
 async function onGoogleButtonPress() {
@@ -65,11 +28,50 @@ async function onGoogleButtonPress() {
     const signInResult = await auth().signInWithCredential(googleCredential);
 
     // Access the user's UID from the result
-    const userUid = signInResult.user.uid;
+    const userId = signInResult.user.uid;
 
-    return userUid;
+    return userId;
   } catch (error) {
     console.error('Google Sign-In Error:', error);
     throw error;
   }
 }
+
+export function GoogleSignIn() {
+  const dispatch = useDispatch();
+  const navigation = useNavigation();
+  const [userUId, setUserUId] = useState(null);
+
+  const handleGoogleSignIn = async () => {
+    try {
+      const uid = await onGoogleButtonPress();
+      console.log('Signed in with Google! User UID:', uid);
+      dispatch(setUserId(uid)); 
+      dispatch(setExpenseDocId(uid));
+      setUserUId(uid);
+      navigation.navigate('TabNavigator');
+    } catch (error) {
+      console.error('Error signing in with Google:', error);
+      // Handle error as needed
+    }
+  };
+
+  return (
+    <TouchableOpacity style={styles.container} onPress={handleGoogleSignIn}>
+      <GoogleSignInButton/>
+      {userUId && <NotificationsComponent userId={userUId} />}
+    </TouchableOpacity>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  centeredContent: {
+    alignItems: 'center',
+  },
+});
+
+

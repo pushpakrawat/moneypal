@@ -11,7 +11,7 @@ import { useSelector } from "react-redux";
 
 export default function OptionsScreen() {
   const navigation = useNavigation();
-  const mode = useSelector((state) => state.app.themeMode);
+  const mode = useSelector((state) => state.app.themeColors);
 
   const styles = StyleSheet.create({
     container: {

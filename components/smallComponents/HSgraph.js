@@ -3,15 +3,13 @@ import React from "react";
 import { LineChart } from "react-native-chart-kit";
 import { Dimensions } from "react-native";
 import { useSelector } from "react-redux";
-import { light, dark } from '../../assets/Theme/Theme';
-import { useTheme } from "react-native-paper";
 
 export default function HSgraph() {
   const filteredExpenses = useSelector(
     (state) => state.expense.filteredExpenses
   );
-  // const mode = useSelector((state) => state.app.themeMode);
-  const mode = useTheme()
+ 
+  const mode = useSelector((state) => state.app.themeColors);
   // Define default data in case filteredExpenses is empty
   const defaultData = {
     labels: ["0", "1", "2", "3", "4"], // Example default labels
@@ -35,8 +33,8 @@ export default function HSgraph() {
           chartConfig={{
             // Your chart configuration for default data
             backgroundColor: "#e26a00",
-            backgroundGradientFrom: mode.colors.primary,
-            backgroundGradientTo: mode.colors.primary,
+            backgroundGradientFrom: mode.primary,
+            backgroundGradientTo: mode.primary,
             decimalPlaces: 0,
             color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
             labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
@@ -100,8 +98,8 @@ export default function HSgraph() {
         yAxisInterval={1}
         chartConfig={{
           backgroundColor: mode.colors.selected,
-          backgroundGradientFrom: mode.colors.primary,
-          backgroundGradientTo: mode.colors.primary,
+          backgroundGradientFrom: mode.primary,
+          backgroundGradientTo: mode.primary,
           decimalPlaces: 0,
           color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
           labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,

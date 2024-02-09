@@ -1,9 +1,9 @@
 import { StyleSheet } from "react-native";
 import { useSelector } from "react-redux";
-import { dark, light } from "../../assets/Theme/Theme";
+
 
 const useDynamicStyles = () => {
-  const mode = useSelector((state) => state.app.themeMode);
+  const mode = useSelector((state) => state.app.themeColors);
 
   // Define your styles based on the selected theme mode
   const styles = StyleSheet.create({

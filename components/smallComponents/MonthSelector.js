@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setYearlyMonth } from '../../redux/actions/expenseActions';
 
 export default function MonthSelector() {
-  const mode = useSelector((state) => state.app.themeMode); 
+  const mode = useSelector((state) => state.app.themeColors);
   const dispatch = useDispatch();
 
   const yearlyMonth = useSelector((state) => state.expense.selectedMonth) - 1;

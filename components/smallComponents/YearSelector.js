@@ -4,7 +4,7 @@ import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import { setSelectedYear } from "../../redux/actions/expenseActions"; // Import your action creator
 
 const YearSelector = () => {
-  const mode = useSelector((state) => state.app.themeMode);
+  const mode = useSelector((state) => state.app.themeColors);
   const currentYear = new Date().getFullYear();
   const selectedYear = useSelector((state) => state.expense.selectedYear); // Assuming selectedYear is stored in Redux store
   const dispatch = useDispatch();
